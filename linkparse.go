@@ -30,8 +30,8 @@ func dfsTextContent(node *html.Node) string {
 
 //Link struct
 type Link struct {
-	url  string
-	text string
+	Url  string
+	Text string
 }
 
 func dfsLinkNodes(node *html.Node) []Link {
@@ -42,7 +42,7 @@ func dfsLinkNodes(node *html.Node) []Link {
 		if node.Data == "a" {
 			for _, a := range node.Attr {
 				if a.Key == "href" {
-					result = append(result, Link{url: a.Val, text: dfsTextContent(node.FirstChild)})
+					result = append(result, Link{Url: a.Val, Text: dfsTextContent(node.FirstChild)})
 					total++
 					break
 				}
