@@ -1,4 +1,4 @@
-package linkparse
+package anchorfinder
 
 import (
 	"strings"
@@ -60,12 +60,15 @@ func dfsLinkNodes(node *html.Node) []Link {
 	return result
 }
 
-// Parse  accepts a html string and finds all the links <a> alongside with its text content
-func Parse(htmlString string) []Link {
+// Find  accepts a html string and finds all the links <a> alongside with its text content
+func Find(htmlString string) ([]Link, error) {
 
-	parsed, _ := html.Parse(strings.NewReader(htmlString))
+	parsed, err := html.Parse(strings.NewReader(htmlString))
+	if err != nil {
+		return nil, err
+	}
 
 	result := dfsLinkNodes(parsed)
-	return result
+	return result, nil
 
 }
